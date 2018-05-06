@@ -1,0 +1,10 @@
+#!/sbin/openrc-run
+
+command=/usr/sbin/vlmcsd
+command_args="-d -t 3 -e -p /run/${RC_SVCNAME}.pid"
+pidfile=/run/${RC_SVCNAME}.pid
+
+depend() {
+    need net
+}
+
