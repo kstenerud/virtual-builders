@@ -54,13 +54,14 @@ Optimal Virtual Windows Setup
   - shutdown
 - qemu-img convert -O qcow2 -c uncompacted.qcow2 compacted.qcow2
 
+Note that if you sysprep, the homedir of the user you used during the initial install will STILL be present after resetting the out of box experience, and will prevent you from creating the same username again.
 
 
 Sources
 -------
 
-https://www.microsoft.com/en-us/software-download/windows10ISO
-https://docs.fedoraproject.org/quick-docs/en-US/creating-windows-virtual-machines-using-virtio-drivers.html
-https://docs.microsoft.com/en-us/windows-server/get-started/kmsclientkeys
-https://docs.microsoft.com/en-us/sysinternals/downloads/sdelete
-http://ultradefrag.sourceforge.net/en/index.html
+* https://www.microsoft.com/en-us/software-download/windows10ISO
+* https://docs.fedoraproject.org/quick-docs/en-US/creating-windows-virtual-machines-using-virtio-drivers.html
+* https://docs.microsoft.com/en-us/windows-server/get-started/kmsclientkeys
+* https://docs.microsoft.com/en-us/sysinternals/downloads/sdelete
+* http://ultradefrag.sourceforge.net/en/index.html
