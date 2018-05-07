@@ -63,17 +63,17 @@ Creating an Installer ISO
 * Download the "Install macOS High Sierra" app from the app store.
 * Run the following:
 
-    hdiutil create -o /tmp/HighSierra.cdr -size 5500m -layout SPUD -fs HFS+J
-    hdiutil attach /tmp/HighSierra.cdr.dmg -noverify -mountpoint /Volumes/install_build
-    sudo /Applications/Install\ macOS\ High\ Sierra.app/Contents/Resources/createinstallmedia --volume /Volumes/install_build
+      hdiutil create -o /tmp/HighSierra.cdr -size 5500m -layout SPUD -fs HFS+J
+      hdiutil attach /tmp/HighSierra.cdr.dmg -noverify -mountpoint /Volumes/install_build
+      sudo /Applications/Install\ macOS\ High\ Sierra.app/Contents/Resources/createinstallmedia --volume /Volumes/install_build
 
 * Enter sudo password, answer Y to continue, then wait for it to finish.
 * Run the following:
 
-    mv /tmp/HighSierra.cdr.dmg ~/Desktop/InstallSystem.dmg
-    hdiutil detach /Volumes/Install\ macOS\ High\ Sierra
-    hdiutil convert ~/Desktop/InstallSystem.dmg -format UDTO -o ~/Desktop/HighSierra.iso
-    mv ~/Desktop/HighSierra.iso.cdr ~/Desktop/HighSierra.iso
+      mv /tmp/HighSierra.cdr.dmg ~/Desktop/InstallSystem.dmg
+      hdiutil detach /Volumes/Install\ macOS\ High\ Sierra
+      hdiutil convert ~/Desktop/InstallSystem.dmg -format UDTO -o ~/Desktop/HighSierra.iso
+      mv ~/Desktop/HighSierra.iso.cdr ~/Desktop/HighSierra.iso
 
 
 

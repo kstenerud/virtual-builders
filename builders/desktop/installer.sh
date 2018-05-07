@@ -42,8 +42,8 @@ create_user()
 	if [ $USERNAME != ubuntu ]; then
 		userdel -r ubuntu
 	    useradd --create-home --shell /bin/bash --user-group --groups adm,sudo $USERNAME
-	    echo "$USERNAME:$PASSWORD" | chpasswd
 	fi
+    echo "$USERNAME:$PASSWORD" | chpasswd
     if [ "$IS_PRIVILEGED" == "true" ]; then
         chown $USERNAME:$USERNAME /home/$USERNAME
     fi

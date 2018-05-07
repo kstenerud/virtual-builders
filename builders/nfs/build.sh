@@ -6,6 +6,7 @@
 set -eu
 
 SCRIPT_HOME=$(readlink -f "$(dirname "${BASH_SOURCE[0]}")")
+LXC_SOURCE_HOME="$SCRIPT_HOME"
 source $SCRIPT_HOME/../common/lxc-helpers.sh
 source $SCRIPT_HOME/../common/options.sh
 
