@@ -38,13 +38,14 @@ install_desktop() {
 }
 
 install_remote_desktop() {
-    install_packages_from_repository ppa:x2go/stable x2goserver x2goserver-xsession
+    install_packages_from_repository ppa:x2go/stable x2goserver x2goserver-xsession x2goclient
     install_packages_from_urls https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb \
                                https://dl.google.com/linux/direct/chrome-remote-desktop_current_amd64.deb
 }
 
 install_other_software() {
     install_packages \
+        remmina \
         telnet
 }
 
