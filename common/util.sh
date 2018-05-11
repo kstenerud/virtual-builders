@@ -40,29 +40,6 @@ fill_placeholder() {
     sed "s/$placeholder/$replacement/g"
 }
 
-# get_colon_separated_arguments_old()
-# {
-#     subargcount=$1
-#     argument=$2
-
-#     pattern="\\(.*\\)"
-#     replace="\1"
-#     if [ $subargcount -gt 1 ]; then
-#         for i in $(seq 2 $subargcount); do
-#             pattern="\\([^:]*\\):$pattern"
-#             replace="$replace \\$i"
-#         done
-#     fi
-
-#     sed_cmd="s/$pattern/$replace/g"
-#     params=( $(echo "$argument"|sed "$sed_cmd") )
-#     if [ ${#params[@]} -eq $subargcount ]; then
-#         echo ${params[@]}
-#     else
-#         echo
-#     fi
-# }
-
 get_colon_separated_arguments()
 {
     subargcount=$1

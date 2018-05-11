@@ -124,16 +124,6 @@ lxc_mount_network_bridge()
 	lxc config device add $LXC_CONTAINER_NAME eth1 nic name=eth1 nictype=bridged parent=$bridge
 }
 
-# lxc_mount_path()
-# {
-# 	echo "mount $1 $2 $3"
-# 	name=$1
-# 	host_path=$2
-# 	guest_path=$3
-# 	lxc exec $LXC_CONTAINER_NAME -- mkdir -p "$guest_path"
-# 	lxc config device add $LXC_CONTAINER_NAME $name disk source="$host_path" path="$guest_path"
-# }
-
 lxc_add_to_fstab()
 {
 	lxc exec $LXC_CONTAINER_NAME -- sh -c "echo \"$1\" >> /etc/fstab"
