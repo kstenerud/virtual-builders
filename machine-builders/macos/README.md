@@ -105,6 +105,15 @@ This happens if the screen resolution settings in OVMF and Clover don't match. D
 
 
 
+Legal Issues
+------------
+
+There is much talk on the internet about Apple operating systems only being licensed to run on Apple hardware. I've been unable to find any such clauses in the license agreement (https://www.apple.com/legal/sla/docs/macOS1013.pdf), but that doesn't necessarily mean they're not there.
+
+I'd recommend having a legal expert from your region examine the license agreement to make sure you're able to remain in compliance with it. Different regions have different restrictions on what is enorceable under a license agreement.
+
+
+
 Notes
 -----
 

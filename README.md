@@ -12,7 +12,7 @@ Usage
 
 Simply run the top level `build.sh` to see what options you have. It will list all environments it can build.
 
-Build.sh is just a launcher for the real build scripts `builders/xyz/build.sh`. You can look inside them to see how they operate, or just call `build.sh xyz -H` to see how to invoke them.
+Build.sh is just a launcher for the real build scripts `machine-builders/xyz/build.sh`. You can look inside them to see how they operate, or just call `build.sh xyz -H` to see how to invoke them.
 
 For example, to get help for starting a samba container:
 
@@ -22,7 +22,7 @@ To start a samba container with the hostname "shared" that shares /mnt/myshare a
 
     ./build.sh samba -n shared -m /mnt/myshare:great-stuff:w
 
-Look at the `README.md` files inside the `builders` subdirs for more information about each virtual environment.
+Look at the `README.md` files inside the `machine-builders` subdirs for more information about each virtual environment.
 
 
 

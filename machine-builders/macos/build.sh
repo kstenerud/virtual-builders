@@ -1,14 +1,14 @@
 #!/bin/bash
 
-set -eu
-
+set -e
 SCRIPT_HOME=$(readlink -f "$(dirname "${BASH_SOURCE[0]}")")
-source $SCRIPT_HOME/../common/options.sh
-source $SCRIPT_HOME/../common/util.sh
+source $SCRIPT_HOME/../../common/options.sh
+source $SCRIPT_HOME/../../common/util.sh
+set -u
 
 options_set_usage "build.sh $(basename "$SCRIPT_HOME") [options] <vm-home>"
 options_set_help_flag_and_description H "Create a MacOS VM."
-options_add_switch n name      "Machine name"         required macos
+options_add_switch n name      "Machine name"         required $(basename $(readlink -f "$SCRIPT_HOME"))
 options_add_switch r gigabytes "RAM size"             required 16
 options_add_switch p units     "Processor Units"      required 4
 options_add_switch d gigabytes "Disk size"            required 128
@@ -20,8 +20,7 @@ options_add_switch I path      "Path to install disk" optional
 options_read_arguments $@
 
 if [ $(options_count_free_arguments) -lt 1 ]; then
-    options_print_help
-    exit 1
+    options_print_help_and_exit 1
 fi
 
 MACHINE_NAME=$(options_get_value n)

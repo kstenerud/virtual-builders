@@ -37,10 +37,12 @@ install_packages samba avahi
 fix_avahi
 
 for i in ${MOUNT_PATHS}; do
-    host_path=$(echo $i|sed 's/\([^:]*\):.*/\1/g')
-    name=$(echo $i|sed 's/[^:]*:\([^:]*\):.*/\1/g')
-    readwrite=$(echo $i|sed 's/[^:]*:[^:]*:\([^:]*\).*/\1/g')
-    mount_share $host_path $name $readwrite
+    set -- $(get_colon_separated_arguments 3 $i)
+    path=$1
+    name=$2
+    readwrite=$3
+
+    mount_share $path $name $readwrite
 done
 
 activate_services samba avahi-daemon

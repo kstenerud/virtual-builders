@@ -1,15 +1,14 @@
 #!/bin/bash
 
-set -eu
-
+set -e
 SCRIPT_HOME=$(readlink -f "$(dirname "${BASH_SOURCE[0]}")")
-LXC_SOURCE_HOME="$SCRIPT_HOME"
-source $SCRIPT_HOME/../common/lxc-helpers.sh
-source $SCRIPT_HOME/../common/options.sh
+source $SCRIPT_HOME/../../common/lxc-helpers.sh "$SCRIPT_HOME"
+source $SCRIPT_HOME/../../common/options.sh
+set -u
 
 options_set_usage "build.sh $(basename "$SCRIPT_HOME") [options]"
 options_set_help_flag_and_description H "Create a key management services container."
-options_add_switch n name "Container name" required kmsserver
+options_add_switch n name "Container name" required $(basename $(readlink -f "$SCRIPT_HOME"))
 options_read_arguments $@
 
 CONTAINER_NAME=$(options_get_value n)

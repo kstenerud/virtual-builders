@@ -4,11 +4,9 @@ SCRIPT_HOME=$(readlink -f "$(dirname "${BASH_SOURCE[0]}")")
 
 list_machines()
 {
-	cd "$SCRIPT_HOME/builders"
+	cd "$SCRIPT_HOME/machine-builders"
     for i in $(ls); do
-    	if [ "$i" != "common" ]; then
-    		echo "    $i"
-    	fi
+    	echo "    $i"
     done
 }
 
@@ -31,8 +29,6 @@ fi
 
 shift
 
-set -eu
-
 echo "Creating new instance of $MACHINE_TYPE with args $@"
 
-"$SCRIPT_HOME/builders/$MACHINE_TYPE/build.sh" $@
+"$SCRIPT_HOME/machine-builders/$MACHINE_TYPE/build.sh" $@

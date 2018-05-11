@@ -1,18 +1,16 @@
 #!/bin/bash
 
-set -eu
-
+set -e
 SCRIPT_HOME=$(readlink -f "$(dirname "${BASH_SOURCE[0]}")")
-LXC_SOURCE_HOME="$SCRIPT_HOME"
-source $SCRIPT_HOME/../common/lxc-helpers.sh
-source $SCRIPT_HOME/../common/options.sh
+source $SCRIPT_HOME/../../common/lxc-helpers.sh "$SCRIPT_HOME"
+source $SCRIPT_HOME/../../common/options.sh
+set -u
 
 options_set_usage "build.sh $(basename "$SCRIPT_HOME") [options]"
 options_set_help_flag_and_description H "Create a Linux desktop container."
 options_add_switch b bridge   "The bridge to connect to"             required br0
-options_add_switch d desktop  "Desktop type to use"                  required mate
 options_add_switch m path     "Path to mount as the user's home dir" required
-options_add_switch n name     "The container's name"                 required desktop
+options_add_switch n name     "Container name"                       required $(basename $(readlink -f "$SCRIPT_HOME"))
 options_add_switch p password "Password to assign to the user"       required ubuntu
 options_add_switch u name     "Name of user to create"               required ubuntu
 options_add_flag   P          "Create a privileged container"        optional
@@ -35,6 +33,6 @@ else
 fi
 lxc restart $CONTAINER_NAME
 
-lxc_mount_path home "$HOME_MOUNT" "/home/$USERNAME"
+lxc_mount_host home "$HOME_MOUNT" "/home/$USERNAME" w
 
-lxc_run_installer_script $DESKTOP_TYPE $USERNAME $PASSWORD $IS_PRIVILEGED
+lxc_run_installer_script $USERNAME $PASSWORD $IS_PRIVILEGED

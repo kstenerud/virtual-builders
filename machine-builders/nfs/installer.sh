@@ -22,9 +22,11 @@ fix_repositories
 install_packages nfs-utils
 
 for i in $MOUNT_PATHS; do
-    path=$(echo $i|sed 's/\([^:]*\):.*/\1/g')
-    machine=$(echo $i|sed 's/[^:]*:\([^:]*\):.*/\1/g')
-    readwrite=$(echo $i|sed 's/[^:]*:[^:]*:\([^:]*\).*/\1/g')
+    set -- $(get_colon_separated_arguments 3 $i)
+    path=$1
+    machine=$2
+    readwrite=$3
+
     mount_share $path $machine $readwrite
 done
 

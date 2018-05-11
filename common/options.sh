@@ -1,4 +1,4 @@
-#!/bin/bash
+INCLUDED_SH=INCLUDED_e7bec90191844db89743809e5cfb01f5; if [ ! -z ${!INCLUDED_SH} ]; then return 0; fi; eval ${INCLUDED_SH}=true
 
 # Options
 # =======
@@ -23,9 +23,6 @@
 #   echo
 #   options_d_print_current_values
 
-
-
-set -eu
 
 # =======
 # GLOBALS
@@ -190,6 +187,17 @@ options_print_help()
     options_print_usage
 }
 
+# Print the help and usage screen and then exit with the supplied return code.
+#
+# @param return_code The return code (0 for success, nonzero for error)
+#
+options_print_help_and_exit()
+{
+    return_code=$1
+    options_print_help
+    exit $return_code
+}
+
 # Print the usage screen.
 #
 options_print_usage() {
@@ -247,8 +255,7 @@ options_i_read_arguments()
             return 1
         fi
         if [ "$switch_char" == "$OPTIONS_SH_HELP_FLAG" ]; then
-            options_print_help
-            exit 0
+            options_print_help_and_exit 0
         fi
         switch_code=$(options_i_get_switch_code $switch_char)
         set +u

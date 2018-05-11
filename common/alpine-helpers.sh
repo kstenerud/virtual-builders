@@ -1,3 +1,5 @@
+INCLUDED_SH=INCLUDED_ade3d2aaae3b4dd780d024b2a6010c3b; if [ ! -z ${!INCLUDED_SH} ]; then return 0; fi; eval ${INCLUDED_SH}=true
+
 fix_repositories()
 {
     add_repositories "http://dl-4.alpinelinux.org/alpine/v3.7/main" \

@@ -1,3 +1,5 @@
+INCLUDED_SH=INCLUDED_580c5d418d224ac6bf5ce7c58d1f5fae; if [ ! -z ${!INCLUDED_SH} ]; then return 0; fi; eval ${INCLUDED_SH}=true
+
 create_user()
 {
     username=$1
