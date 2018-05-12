@@ -106,7 +106,7 @@ lxc_run_script()
     cat "$user_script" >> $src_script
     echo "" >> $src_script
     chmod a+x $src_script
-    lxc file push $src_script $LXC_CONTAINER_NAME/$dst_script
+    lxc file push $src_script $LXC_CONTAINER_NAME$dst_script
     rm $src_script
     lxc exec $LXC_CONTAINER_NAME -- $LXC_INTERPRETER $dst_script $@
 #    lxc exec $LXC_CONTAINER_NAME -- rm $dst_script

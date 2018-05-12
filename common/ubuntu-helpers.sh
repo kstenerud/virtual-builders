@@ -1,5 +1,10 @@
 INCLUDED_SH=INCLUDED_580c5d418d224ac6bf5ce7c58d1f5fae; if [ ! -z ${!INCLUDED_SH} ]; then return 0; fi; eval ${INCLUDED_SH}=true
 
+fix_repositories()
+{
+    install_packages wget
+}
+
 create_user()
 {
     username=$1
@@ -7,6 +12,13 @@ create_user()
     echo "Creating user $username"
     useradd --create-home --shell /bin/bash --user-group --groups adm,sudo $username
     echo ${username}:${password} | chpasswd
+}
+
+create_nologin_user()
+{
+    username=$1
+    echo "Creating nologin user $username"
+    useradd --shell /usr/sbin/nologin --user-group --groups $username
 }
 
 delete_user()
