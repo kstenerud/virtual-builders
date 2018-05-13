@@ -33,7 +33,6 @@ get_next_mount_name()
 }
 
 lxc_build_standard_container $CONTAINER_DISTRO $CONTAINER_NAME
-lxc restart $CONTAINER_NAME
 
 lxc_mount_host plexconfig "$CONFIG_DIRECTORY" "/var/lib/plexmediaserver" r
 
