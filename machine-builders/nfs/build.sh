@@ -26,8 +26,8 @@ options_add_switch m number "Mount a directory for sharing" required
 options_add_switch n name   "Container name"                required $(basename $(readlink -f "$SCRIPT_HOME"))
 options_read_arguments $@
 
-CONTAINER_NAME=$(options_get_value n)
 CONTAINER_DISTRO=alpine
+CONTAINER_NAME=$(options_get_value n)
 SHARED_DIRECTORIES=$(options_get_values m)
 MOUNT_PATHS=()
 MOUNT_INDEX=1

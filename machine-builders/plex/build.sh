@@ -17,8 +17,8 @@ options_add_switch m path "Mount a media directory" required
 options_add_switch n name   "Container name"          required $(basename $(readlink -f "$SCRIPT_HOME"))
 options_read_arguments $@
 
+CONTAINER_DISTRO=bionic
 CONTAINER_NAME=$(options_get_value n)
-CONTAINER_DISTRO=ubuntu
 SHARED_DIRECTORIES=$(options_get_values m)
 CONFIG_DIRECTORY=$(options_get_value c)
 MOUNT_PATHS=()

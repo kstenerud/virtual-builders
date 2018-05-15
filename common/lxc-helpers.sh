@@ -7,11 +7,25 @@ source "$LXC_HELPERS_HOME/util.sh"
 LXC_CONTAINER_DISTRO=
 LXC_CONTAINER_NAME=
 LXC_INTERPRETER=
+LXC_HELPERS_SCRIPT=
 LXC_STORAGE_POOL=default
 
 declare -A LXC_CONTAINER_INTERPRETERS
-LXC_CONTAINER_INTERPRETERS[alpine]=/bin/sh
-LXC_CONTAINER_INTERPRETERS[ubuntu]=/bin/bash
+declare -A LXC_CONTAINER_HELPER_SCRIPTS
+
+lxc_i_add_distro() {
+	name=$1
+	interpreter=$2
+	helpers_script=$3
+
+	LXC_CONTAINER_INTERPRETERS[$name]="$interpreter"
+	LXC_CONTAINER_HELPER_SCRIPTS[$name]="$helpers_script"
+}
+
+lxc_i_add_distro alpine /bin/sh alpine-helpers.sh
+lxc_i_add_distro edge /bin/sh alpine-helpers.sh
+lxc_i_add_distro ubuntu /bin/bash ubuntu-helpers.sh
+lxc_i_add_distro bionic /bin/bash ubuntu-helpers.sh
 
 lxc_get_container_init_args()
 {
@@ -29,7 +43,19 @@ lxc_init_distro_alpine()
     lxc stop $LXC_CONTAINER_NAME
 }
 
+lxc_init_distro_edge()
+{
+    lxc launch images:alpine/edge $LXC_CONTAINER_NAME $(lxc_get_container_init_args)
+    lxc exec $LXC_CONTAINER_NAME -- sed -i 's/^tty/#tty/g' /etc/inittab
+    lxc stop $LXC_CONTAINER_NAME
+}
+
 lxc_init_distro_ubuntu()
+{
+    lxc init images:ubuntu/bionic $LXC_CONTAINER_NAME $(lxc_get_container_init_args)
+}
+
+lxc_init_distro_bionic()
 {
     lxc init images:ubuntu/bionic $LXC_CONTAINER_NAME $(lxc_get_container_init_args)
 }
@@ -45,6 +71,7 @@ lxc_new_container()
 	echo "Creating new $LXC_CONTAINER_DISTRO distribution called $LXC_CONTAINER_NAME"
 	set +u
 	LXC_INTERPRETER=${LXC_CONTAINER_INTERPRETERS[$LXC_CONTAINER_DISTRO]}
+	LXC_HELPERS_SCRIPT=${LXC_CONTAINER_HELPER_SCRIPTS[$LXC_CONTAINER_DISTRO]}
 	set -u
 	lxc_init_distro_$LXC_CONTAINER_DISTRO
 }
@@ -100,7 +127,7 @@ lxc_run_script()
     dst_script=/tmp/$script_name
 
 	echo "#!${LXC_INTERPRETER}" > $src_script
-    tail -n +2 "${LXC_HELPERS_HOME}/${LXC_CONTAINER_DISTRO}-helpers.sh" >> $src_script
+    tail -n +2 "${LXC_HELPERS_HOME}/${LXC_HELPERS_SCRIPT}" >> $src_script
     tail -n +2 "${LXC_HELPERS_HOME}/util.sh" >> $src_script
 	echo "set -eu" >> $src_script
     cat "$user_script" >> $src_script
@@ -109,7 +136,7 @@ lxc_run_script()
     lxc file push $src_script $LXC_CONTAINER_NAME$dst_script
     rm $src_script
     lxc exec $LXC_CONTAINER_NAME -- $LXC_INTERPRETER $dst_script $@
-#    lxc exec $LXC_CONTAINER_NAME -- rm $dst_script
+    lxc exec $LXC_CONTAINER_NAME -- rm $dst_script
 }
 
 lxc_fix_unprivileged_dbus()
