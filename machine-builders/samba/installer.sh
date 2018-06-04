@@ -32,9 +32,16 @@ fix_avahi()
     rm /etc/avahi/services/ssh.service /etc/avahi/services/sftp-ssh.service
 }
 
+set_netbios_name()
+{
+    hostname=$(cat /etc/hostname)
+    sed -i "s/PLACEHOLDER_NETBIOS_NAME/$hostname/g" /etc/samba/smb.conf
+}
+
 fix_repositories
 install_packages samba avahi
 fix_avahi
+set_netbios_name
 
 for i in ${MOUNT_PATHS}; do
     set -- $(get_colon_separated_arguments 3 $i)
