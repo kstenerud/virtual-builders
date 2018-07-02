@@ -12,4 +12,4 @@ mv tumblr_backup/* .
 rm -rf tumblr_backup
 chown tumblr:tumblr *
 chown -R tumblr:tumblr tumblr-utils
-echo "25 1	* * *	tumblr	/home/tumblr/backup.sh >> /var/log/tumblr-backup.log 2>&1" >> /etc/crontab
+(crontab -l 2>/dev/null; echo "25	1	*	*	*	/home/tumblr/backup.sh >> /home/tumblr/backup.log 2>&1") | crontab -u tumblr -
