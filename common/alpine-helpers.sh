@@ -13,6 +13,8 @@ create_user()
     echo "Creating user $username"
     useradd --create-home --shell /bin/sh --user-group --groups adm,sudo $username
     echo ${username}:${password} | chpasswd
+    # Fix permissions so that non-root can see the fs
+    chmod 755 /
 }
 
 delete_user()

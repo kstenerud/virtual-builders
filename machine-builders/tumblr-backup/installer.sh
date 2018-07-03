@@ -1,4 +1,5 @@
 adduser -h /home/tumblr -s /sbin/nologin -D -u 1000 tumblr tumblr
+chmod 755 /
 
 fix_repositories
 install_packages bash git openssh python
