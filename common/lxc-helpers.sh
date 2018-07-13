@@ -26,6 +26,7 @@ lxc_i_add_distro alpine /bin/sh alpine-helpers.sh
 lxc_i_add_distro edge /bin/sh alpine-helpers.sh
 lxc_i_add_distro ubuntu /bin/bash ubuntu-helpers.sh
 lxc_i_add_distro bionic /bin/bash ubuntu-helpers.sh
+lxc_i_add_distro xenial /bin/bash ubuntu-helpers.sh
 
 lxc_get_container_init_args()
 {
@@ -58,6 +59,11 @@ lxc_init_distro_ubuntu()
 lxc_init_distro_bionic()
 {
     lxc init images:ubuntu/bionic $LXC_CONTAINER_NAME $(lxc_get_container_init_args)
+}
+
+lxc_init_distro_xenial()
+{
+    lxc init images:ubuntu/xenial $LXC_CONTAINER_NAME $(lxc_get_container_init_args)
 }
 
 lxc_set_container() {
