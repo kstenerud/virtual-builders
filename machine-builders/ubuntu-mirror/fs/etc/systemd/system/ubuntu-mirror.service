@@ -1,0 +1,15 @@
+[Unit]
+Description=Starts an Ubuntu APT http mirror
+After=network.target
+
+[Service]
+Type=idle
+WorkingDirectory=/var/spool/apt-mirror
+ExecStart=/usr/bin/python3 -m http.server 80
+TimeoutStopSec=1
+Restart=always
+RestartSec=2
+StartLimitInterval=0
+
+[Install]
+WantedBy=multi-user.target

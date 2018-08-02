@@ -84,3 +84,13 @@ install_script_from_url()
     $tmpfile $arguments
     rm "$tmpfile"
 }
+
+activate_services()
+{
+    service_names=$@
+    for service in $service_names; do
+        echo "Activating service $service"
+        systemctl enable $service
+        systemctl start $service
+    done
+}
