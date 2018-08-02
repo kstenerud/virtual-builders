@@ -34,7 +34,7 @@ VM_HOME="$(readlink -f "$(options_get_free_argument 0)")"
 PRIMARY_HDD="$VM_HOME/primary.qcow2"
 
 
-echo "Create Windows machine \"$MACHINE_NAME\" at $VM_HOME with ${RAM_GB}G RAM, $PROCESSORS processors, VNC $VNC_PORT"
+echo "Create Ubuntu machine \"$MACHINE_NAME\" at $VM_HOME with ${RAM_GB}G RAM, $PROCESSORS processors, VNC $VNC_PORT"
 
 if [ ! -d "$VM_HOME" ]; then
     echo "Creating VM directory at $VM_HOME"
@@ -52,11 +52,11 @@ fi
 
 build_virt_command()
 {
-    ram_kb=$(($RAM_GB * 1024))
+    ram_mb=$(($RAM_GB * 1024))
 
 	echo -n "virt-install"
     echo -n " --name=$MACHINE_NAME"
-    echo -n " --ram=$ram_kb"
+    echo -n " --ram=$ram_mb"
     echo -n " --cpu=host"
     echo -n " --vcpus=$PROCESSORS"
     echo -n " --os-type=linux"
