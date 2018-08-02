@@ -1,7 +1,23 @@
 #!/bin/bash
 
-echo "lxcnobody:x:165534:" >> /etc/group
-echo "lxcnobody:x:165534:165534:Maps to user nobody inside an LXC container:/nonexistent:/usr/sbin/nologin" >> /etc/passwd
+set -eu
 
-echo "lxcfirstuser:x:101000:" >> /etc/group
-echo "lxcfirstuser:x:101000:101000:Maps to the first user (1000) inside an LXC container:/nonexistent:/usr/sbin/nologin" >> /etc/passwd
+create_user()
+{
+	username=$1
+	uid=$2
+	set +u
+	gid=$3
+	set -u
+	if [ "X$gid" = "X" ]; then
+		gid=$uid
+	fi
+	groupadd --force --gid $gid $uid
+	set +e
+	useradd --home-dir /nonexistent --shell /usr/sbin/nologin --no-log-init --no-create-home --uid $uid --gid $gid $username
+	set -e
+}
+
+create_user lxcroot       100000
+create_user lxcfirstuser  101000
+create_user lxcnobody     165534
