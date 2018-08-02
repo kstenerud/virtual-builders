@@ -4,7 +4,7 @@ After=network.target
 
 [Service]
 Type=idle
-WorkingDirectory=/var/spool/apt-mirror
+WorkingDirectory=/var/spool/apt-mirror/mirror/archive.ubuntu.com/
 ExecStart=/usr/bin/python3 -m http.server 80
 TimeoutStopSec=1
 Restart=always
