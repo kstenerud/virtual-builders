@@ -12,7 +12,7 @@ create_user()
 	if [ "X$gid" = "X" ]; then
 		gid=$uid
 	fi
-	groupadd --force --gid $gid $uid
+	groupadd --force --gid $gid $username
 	set +e
 	useradd --home-dir /nonexistent --shell /usr/sbin/nologin --no-log-init --no-create-home --uid $uid --gid $gid $username
 	set -e
