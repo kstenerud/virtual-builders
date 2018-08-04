@@ -15,7 +15,9 @@ Follow instructions at http://gmvault.org/gmail_setup.html
 
 ### First Time Run
 
-Open a shell `lxc exec gmvault bash` and run `gmvault sync foo.bar@gmail.com`
+Note: This container is set up to run gmvault under user `gmail`.
+
+Open a shell `lxc exec gmvault bash` and run `sudo -u gmail gmvault sync foo.bar@gmail.com`
 
 
 ### Update Runs

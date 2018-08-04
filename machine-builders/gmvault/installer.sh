@@ -6,7 +6,7 @@ adduser -h /home/gmail -s /sbin/nologin -D -u 1000 gmail gmail
 chmod 755 /
 
 fix_repositories
-install_packages bash py-pip
+install_packages bash py-pip sudo
 
 cd /home/gmail
 pip install gmvault
