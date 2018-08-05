@@ -1,3 +1,12 @@
+disable_services \
+    apport \
+    cpufrequtils \
+    hddtemp \
+    lm-sensors \
+    network-manager \
+    speech-dispatcher \
+    ufw \
+    unattended-upgrades
 set -eu
 
 DESKTOP_TYPE=$1
@@ -113,6 +122,18 @@ install_dev_software() {
     install_script_from_url https://sh.rustup.rs -y
 }
 
+disable_unneeded_services() {
+    disable_services \
+        apport \
+        cpufrequtils \
+        hddtemp \
+        lm-sensors \
+        network-manager \
+        speech-dispatcher \
+        ufw \
+        unattended-upgrades
+}
+
 sleep 2
 # apply_dns_fix
 apply_bluetooth_fix
@@ -121,3 +142,4 @@ install_desktop
 install_remote_desktop
 install_other_software
 install_dev_software
+disable_unneeded_services

@@ -94,3 +94,12 @@ activate_services()
         systemctl start $service
     done
 }
+
+disable_services()
+{
+    service_names=$@
+    for service in $service_names; do
+        echo "Disabling service $service"
+        systemctl disable $service
+    done
+}

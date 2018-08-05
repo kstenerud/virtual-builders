@@ -49,6 +49,18 @@ install_other_software() {
         telnet
 }
 
+disable_unneeded_services() {
+    disable_services \
+        apport \
+        cpufrequtils \
+        hddtemp \
+        lm-sensors \
+        network-manager \
+        speech-dispatcher \
+        ufw \
+        unattended-upgrades
+}
+
 sleep 2
 # apply_dns_fix
 apply_bluetooth_fix
@@ -56,3 +68,4 @@ create_user
 install_desktop
 install_remote_desktop
 install_other_software
+disable_unneeded_services
