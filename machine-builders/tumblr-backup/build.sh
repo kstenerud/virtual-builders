@@ -20,6 +20,6 @@ MOUNT_INDEX=1
 
 lxc_build_standard_container $CONTAINER_DISTRO $CONTAINER_NAME
 
-lxc_mount_host blogs "$BLOGS_DIRECTORY" "/home/tumblr/blogs" w
+lxc_mount_host_owned_by blogs "$BLOGS_DIRECTORY" "/home/tumblr/blogs" w lxcfirstuser
 
 lxc_run_installer_script

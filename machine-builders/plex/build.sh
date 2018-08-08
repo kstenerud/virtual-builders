@@ -34,7 +34,7 @@ get_next_mount_name()
 
 lxc_build_standard_container $CONTAINER_DISTRO $CONTAINER_NAME
 
-lxc_mount_host plexconfig "$CONFIG_DIRECTORY" "/var/lib/plexmediaserver" r
+lxc_mount_host_owned_by plexconfig "$CONFIG_DIRECTORY" "/var/lib/plexmediaserver" w lxcfirstuser
 
 for i in $SHARED_DIRECTORIES; do
 	params=($(get_colon_separated_arguments 2 $i))

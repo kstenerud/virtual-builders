@@ -33,6 +33,6 @@ else
 fi
 lxc restart $CONTAINER_NAME
 
-lxc_mount_host home "$HOME_MOUNT" "/home/$USERNAME" w
+lxc_mount_host_owned_by home "$HOME_MOUNT" "/home/$USERNAME" w lxcfirstuser
 
 lxc_run_installer_script $USERNAME $PASSWORD $IS_PRIVILEGED

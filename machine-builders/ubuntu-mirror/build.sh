@@ -23,6 +23,6 @@ RELEASE=$(options_get_value r)
 
 lxc_build_standard_container $CONTAINER_DISTRO $CONTAINER_NAME
 
-lxc_mount_host mirror "$HOME_MOUNT" "/var/spool/apt-mirror" w
+lxc_mount_host_owned_by mirror "$HOME_MOUNT" "/var/spool/apt-mirror" w lxcroot
 
 lxc_run_installer_script $RELEASE

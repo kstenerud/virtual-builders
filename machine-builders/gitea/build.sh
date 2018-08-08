@@ -20,6 +20,6 @@ MOUNT_INDEX=1
 
 lxc_build_standard_container $CONTAINER_DISTRO $CONTAINER_NAME
 
-lxc_mount_host home "$HOME_DIRECTORY" "/var/lib/gitea" r
+lxc_mount_host_owned_by home "$HOME_DIRECTORY" "/var/lib/gitea" w lxcfirstuser
 
 lxc_run_installer_script

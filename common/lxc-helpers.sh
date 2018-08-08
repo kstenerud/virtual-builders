@@ -207,6 +207,22 @@ lxc_mount_host() {
 	lxc config device add $LXC_CONTAINER_NAME $device_name disk source="$host_path" path="$mount_point"
 }
 
+lxc_mount_host_owned_by() {
+	device_name=$1
+	host_path=$2
+	mount_point=$3
+	read_write=$4
+	owned_by=$5
+
+	owning_user=$(stat -c "%U" "$host_path")
+	if [ "$owning_user" != "$owned_by" ]; then
+		echo "Error: $host_path must be owned by $owned_by."
+		echo "Use the scripts in the utils dir to create the required users."
+		return 1
+	fi
+	lxc_mount_host "%device_name" "$host_path" "$mount_point" w
+}
+
 lxc_mount_print_help() {
 	echo "Mount format: protocol:server:share_path:mount_point:r_or_w"
 	echo "Examples:"

@@ -20,6 +20,6 @@ EMAIL_ADDRESS=$(options_get_value e)
 
 lxc_build_standard_container $CONTAINER_DISTRO $CONTAINER_NAME
 
-lxc_mount_host backup "$BACKUP_DIRECTORY" "/home/gmail" w
+lxc_mount_host_owned_by backup "$BACKUP_DIRECTORY" "/home/gmail" w lxcfirstuser
 
 lxc_run_installer_script $EMAIL_ADDRESS
