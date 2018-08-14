@@ -151,6 +151,16 @@ lxc_fix_unprivileged_dbus()
     lxc config device add $LXC_CONTAINER_NAME fuse unix-char major=10 minor=229 path=/dev/fuse
 }
 
+lxc_uid_has_permission() {
+	uid=$1
+	file="$2"
+	mode=$3 # r, w, or x
+
+	if ! sudo -u "#$uid" /bin/sh -c "[ -${mode} '$file' ]" ; then
+	    return 1
+	fi
+}
+
 lxc_mount_network_bridge()
 {
 	bridge=$1
