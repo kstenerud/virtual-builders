@@ -51,6 +51,4 @@ for i in $SHARED_DIRECTORIES; do
 	MOUNT_PATHS+=("$guest_path")
 done
 
-echo "Sleeping 5 seconds to give network time to come up..."
-sleep 5
 lxc_run_installer_script ${MOUNT_PATHS[@]}

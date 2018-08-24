@@ -85,8 +85,6 @@ lxc_new_container()
 lxc_start_container()
 {
 	lxc start $LXC_CONTAINER_NAME
-	# Give time for networking to start
-	sleep 1
 }
 
 lxc_mark_privileged()
@@ -96,7 +94,7 @@ lxc_mark_privileged()
 
 lxc_exec()
 {
-	lxc exec $LXC_CONTAINER_NAME $@
+	lxc exec $LXC_CONTAINER_NAME -- $@
 }
 
 lxc_copy_dir_into_container()
@@ -165,6 +163,15 @@ lxc_mount_network_bridge()
 {
 	bridge=$1
 	lxc config device add $LXC_CONTAINER_NAME eth1 nic name=eth1 nictype=bridged parent=$bridge
+}
+
+lxc_wait_for_network()
+{
+	until lxc_exec ping -c 1 -w 15 8.8.8.8 >/dev/null 2>&1
+	do
+		echo "Waiting for network"
+		sleep 1
+	done
 }
 
 lxc_add_to_fstab()
@@ -284,6 +291,7 @@ lxc_mount() {
 
 lxc_run_installer_script()
 {
+	echo "Running installer script"
 	lxc_run_script "$LXC_SOURCE_HOME/installer.sh" $@
 }
 
@@ -294,4 +302,5 @@ lxc_build_standard_container()
 	lxc_new_container $distro $name
 	lxc_start_container
 	lxc_copy_fs
+	lxc_wait_for_network
 }

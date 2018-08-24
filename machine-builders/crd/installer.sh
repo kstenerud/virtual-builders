@@ -61,7 +61,6 @@ disable_unneeded_services() {
         unattended-upgrades
 }
 
-sleep 2
 # apply_dns_fix
 apply_bluetooth_fix
 create_user

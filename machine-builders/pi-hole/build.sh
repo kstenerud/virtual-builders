@@ -20,6 +20,4 @@ lxc_build_standard_container $CONTAINER_DISTRO $CONTAINER_NAME
 
 lxc_mount_host_owned_by piholeconfig "$CONFIG_DIRECTORY" "/etc/pihole" w lxcroot
 
-echo "Sleeping 5 seconds to give network time to come up..."
-sleep 5
 lxc_run_installer_script
