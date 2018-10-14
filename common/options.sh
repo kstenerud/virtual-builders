@@ -52,7 +52,7 @@ OPTIONS_SH_HELP_DESCRIPTION=
 # @param usage The usage format
 #
 options_set_usage() {
-    OPTIONS_SH_USAGE=$1
+    OPTIONS_SH_USAGE="$1"
 }
 
 # Add an option switch
@@ -65,21 +65,21 @@ options_set_usage() {
 #
 options_add_switch()
 {
-    switch_char=$1
-    switch_code=$(options_i_get_switch_code $switch_char)
-    arg_name=$2
-    description=$3
-    required=$4
+    switch_char="$1"
+    switch_code="$(options_i_get_switch_code $switch_char)"
+    arg_name="$2"
+    description="$3"
+    required="$4"
     set +u
-    default_value=$5
+    default_value="$5"
 
     OPTIONS_SH_SWITCH_CHARS+=($switch_char)
     OPTIONS_SH_SWITCH_CODES+=($switch_code)
-    OPTIONS_SH_SWITCH_CHARS_BY_CODE[$switch_code]=$switch_char
-    OPTIONS_SH_ARG_NAMES[$switch_code]=$arg_name
-    OPTIONS_SH_DESCRIPTIONS[$switch_code]=$description
-    OPTIONS_SH_REQUIRED_ARGS[$switch_code]=$required
-    OPTIONS_SH_DEFAULT_VALUES[$switch_code]=$default_value
+    OPTIONS_SH_SWITCH_CHARS_BY_CODE[$switch_code]="$switch_char"
+    OPTIONS_SH_ARG_NAMES[$switch_code]="$arg_name"
+    OPTIONS_SH_DESCRIPTIONS[$switch_code]="$description"
+    OPTIONS_SH_REQUIRED_ARGS[$switch_code]="$required"
+    OPTIONS_SH_DEFAULT_VALUES[$switch_code]="$default_value"
     options_i_define_array OPTIONS_SH_CURRENT_VALUES_$switch_code
     set -u
 }
@@ -93,8 +93,8 @@ options_add_switch()
 #
 options_add_flag()
 {
-    switch_char=$1
-    description=$2
+    switch_char="$1"
+    description="$2"
     options_add_switch $switch_char "" "$description" optional false
 }
 
@@ -124,7 +124,7 @@ options_read_arguments()
 #
 options_get_value()
 {
-    switch_char=$1
+    switch_char="$1"
     options_i_get_value $(options_i_get_switch_code $switch_char)
 }
 
@@ -135,7 +135,7 @@ options_get_value()
 #
 options_get_values()
 {
-    switch_char=$1
+    switch_char="$1"
     options_i_get_values $(options_i_get_switch_code $switch_char)
 }
 
@@ -167,15 +167,15 @@ options_get_free_arguments()
 #
 options_get_free_argument()
 {
-    index=$1
+    index="$1"
     echo "${OPTIONS_SH_FREE_ARGUMENTS[$index]}"
 }
 
 options_set_help_flag_and_description()
 {
     options_add_flag H "Print help"
-    OPTIONS_SH_HELP_FLAG=$1
-    OPTIONS_SH_HELP_DESCRIPTION=$2
+    OPTIONS_SH_HELP_FLAG="$1"
+    OPTIONS_SH_HELP_DESCRIPTION="$2"
 }
 
 # Print the help and usage screen
@@ -193,7 +193,7 @@ options_print_help()
 #
 options_print_help_and_exit()
 {
-    return_code=$1
+    return_code="$1"
     options_print_help
     exit $return_code
 }
@@ -257,7 +257,7 @@ options_i_read_arguments()
         if [ "$switch_char" == "$OPTIONS_SH_HELP_FLAG" ]; then
             options_print_help_and_exit 0
         fi
-        switch_code=$(options_i_get_switch_code $switch_char)
+        switch_code="$(options_i_get_switch_code $switch_char)"
         set +u
         if [ "X${OPTIONS_SH_DESCRIPTIONS[$switch_code]}" == "X" ]; then
             return 1
@@ -270,7 +270,7 @@ options_i_read_arguments()
         else
             value="$OPTARG"
         fi
-        values_ref=$(options_i_get_current_values_ref $switch_code)
+        values_ref="$(options_i_get_current_values_ref $switch_code)"
         options_i_array_append $values_ref "$value"
     done
     shift $((OPTIND-1))
@@ -284,13 +284,13 @@ options_i_read_arguments()
 
     failure=false
     for switch_code in ${OPTIONS_SH_SWITCH_CODES[@]}; do
-        values_ref=$(options_i_get_current_values_ref $switch_code)
+        values_ref="$(options_i_get_current_values_ref $switch_code)"
         if [ $(options_i_get_array_length $values_ref) -eq 0 ]; then
             options_i_array_append $values_ref "${OPTIONS_SH_DEFAULT_VALUES[$switch_code]}"
         fi
         if [ $(options_i_get_array_length $values_ref) -eq 0 ]; then
             if [ "${OPTIONS_SH_REQUIRED_ARGS[$switch_code]}" == required ]; then
-                switch_char=${OPTIONS_SH_SWITCH_CHARS_BY_CODE[$switch_code]}
+                switch_char="${OPTIONS_SH_SWITCH_CHARS_BY_CODE[$switch_code]}"
                 echo "-$switch_char is a required argument."
                 failure=true
             fi
@@ -309,7 +309,7 @@ options_i_read_arguments()
 #
 options_i_get_switch_code()
 {
-    switch_char=$1
+    switch_char="$1"
     echo -n "$switch_char" | hexdump -v -e '/1 "%02X"'
 }
 
@@ -319,7 +319,7 @@ options_i_get_switch_code()
 #
 options_i_get_current_values_ref()
 {
-    switch_code=$1
+    switch_code="$1"
     echo "OPTIONS_SH_CURRENT_VALUES_$switch_code"
 }
 
@@ -329,7 +329,7 @@ options_i_get_current_values_ref()
 #
 options_i_define_array()
 {
-    array_ref=$1
+    array_ref="$1"
     eval "$array_ref=()"
 }
 
@@ -365,7 +365,7 @@ options_i_array_append()
 options_i_get_last_entry()
 {
     array_ref="$1"
-    count=$(options_i_get_array_length $array_ref)
+    count="$(options_i_get_array_length $array_ref)"
     if [ $count -gt 0 ]; then
         last_entry_ref=$array_ref"[$count - 1]"
         echo ${!last_entry_ref}
@@ -394,9 +394,9 @@ options_i_get_all_entries()
 #
 options_i_get_value()
 {
-    switch_code=$1
-    array_ref=$(options_i_get_current_values_ref $switch_code)
-    count=$(options_i_get_array_length $array_ref)
+    switch_code="$1"
+    array_ref="$(options_i_get_current_values_ref $switch_code)"
+    count="$(options_i_get_array_length $array_ref)"
     if [ count == "0" ]; then
         echo ""
         return
@@ -412,8 +412,8 @@ options_i_get_value()
 #
 options_i_get_values()
 {
-    switch_code=$1
-    array_ref=$(options_i_get_current_values_ref $switch_code)
+    switch_code="$1"
+    array_ref="$(options_i_get_current_values_ref $switch_code)"
     options_i_get_all_entries $array_ref
 }
 
@@ -424,7 +424,7 @@ options_i_get_values()
 options_i_get_optstring()
 {
     for switch_code in ${OPTIONS_SH_SWITCH_CODES[@]}; do
-        switch_char=${OPTIONS_SH_SWITCH_CHARS_BY_CODE[$switch_code]}
+        switch_char="${OPTIONS_SH_SWITCH_CHARS_BY_CODE[$switch_code]}"
         printf "$switch_char"
         if [ "X${OPTIONS_SH_ARG_NAMES[$switch_code]}" != "X" ]; then
             printf ":"
@@ -442,16 +442,18 @@ options_i_get_switches()
     IFS=$'\n' switch_chars=($(sort <<<"${OPTIONS_SH_SWITCH_CHARS[*]}"))
     unset IFS
     for switch_char in ${switch_chars[@]}; do
-        switch_code=$(options_i_get_switch_code $switch_char)
-        arg_name=${OPTIONS_SH_ARG_NAMES[$switch_code]}
+        switch_code="$(options_i_get_switch_code $switch_char)"
+        arg_name="${OPTIONS_SH_ARG_NAMES[$switch_code]}"
         if [ "X$arg_name" != "X" ]; then
             arg_name=" ${arg_name}"
         else
             arg_name=" "
         fi
-        default_value=${OPTIONS_SH_DEFAULT_VALUES[$switch_code]}
+        default_value="${OPTIONS_SH_DEFAULT_VALUES[$switch_code]}"
         if [ "X$default_value" != "X" ]; then
             default_value=" (default $default_value)"
+        elif [ "${OPTIONS_SH_REQUIRED_ARGS[$switch_code]}" == required ]; then
+            default_value=" [required]"
         fi
         if [ "X${OPTIONS_SH_ARG_NAMES[$switch_code]}" == "X" ]; then
             default_value=

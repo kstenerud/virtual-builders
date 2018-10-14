@@ -1,7 +1,7 @@
-MOUNT_PATHS=$@
+MOUNT_PATHS="$@"
 
 delete_user ubuntu
-useradd -U -d /var/lib/plexmediaserver -s /bin/false plex
+useradd -U -d /var/lib/plexmediaserver -s /usr/sbin/nologin plex
 usermod -G users plex
 
 fix_repositories

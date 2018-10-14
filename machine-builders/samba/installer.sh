@@ -1,4 +1,4 @@
-MOUNT_PATHS=$@
+MOUNT_PATHS="$@"
 
 get_writable() {
     case "$1" in
@@ -11,9 +11,9 @@ get_writable() {
 }
 
 mount_share() {
-    path=$1
-    name=$2
-    writable=$(get_writable $3)
+    path="$1"
+    name="$2"
+    writable="$(get_writable "$3")"
     echo "Mounting $path as $name (writable=$writable)"
     smbconf="/etc/samba/smb.conf"
     echo "" >> $smbconf
@@ -45,9 +45,9 @@ set_netbios_name
 
 for i in ${MOUNT_PATHS}; do
     set -- $(get_colon_separated_arguments 3 $i)
-    path=$1
-    name=$2
-    readwrite=$3
+    path="$1"
+    name="$2"
+    readwrite="$3"
 
     mount_share $path $name $readwrite
 done

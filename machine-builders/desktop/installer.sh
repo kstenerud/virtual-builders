@@ -1,23 +1,14 @@
-disable_services \
-    apport \
-    cpufrequtils \
-    hddtemp \
-    lm-sensors \
-    network-manager \
-    speech-dispatcher \
-    ufw \
-    unattended-upgrades
 set -eu
 
-DESKTOP_TYPE=$1
-USERNAME=$2
-PASSWORD=$3
-IS_PRIVILEGED=$4
+DESKTOP_TYPE="$1"
+USERNAME="$2"
+PASSWORD="$3"
+IS_PRIVILEGED="$4"
 
 declare -A DESKTOPS
 declare -a DESKTOP_KEYS
 function add_desktop {
-    DESKTOPS[$1]=$2
+    DESKTOPS[$1]="$2"
     DESKTOP_KEYS+=( $1 )
 }
 add_desktop budgie   "ubuntu-budgie-desktop gnome-settings-daemon gnome-session"
@@ -30,21 +21,6 @@ add_desktop ubuntu   ubuntu-desktop
 add_desktop unity    ubuntu-unity-desktop
 add_desktop xfce     xubuntu-desktop
 add_desktop all      ${DESKTOPS[*]}
-
-apply_dns_fix()
-{
-    echo "8.8.8.8" >/etc/resolv.conf
-}
-
-apply_bluetooth_fix()
-{
-	# Force bluetooth to install and then disable it so that it doesn't break the rest of the install.
-	set +e
-	apt install -y bluez
-	set -e
-	systemctl disable bluetooth
-	apt install -y
-}
 
 create_user()
 {
@@ -67,61 +43,15 @@ install_remote_desktop() {
     install_packages_from_repository ppa:x2go/stable x2goserver x2goserver-xsession
     install_packages_from_urls https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb \
                                https://dl.google.com/linux/direct/chrome-remote-desktop_current_amd64.deb
+    crd_enable_high_resolution
 }
 
 install_other_software() {
     install_packages \
-        amule \
-        gedit \
-        openvpn \
+        nfs-common \
         telnet \
-        transmission \
         filezilla
 }
-
-install_dev_software() {
-    install_packages \
-        autoconf \
-        bison \
-        build-essential \
-        flex \
-        geany \
-        gettext \
-        git \
-        gradle \
-        gvfs-bin \
-        libfuse-dev \
-        libglu1-mesa \
-        libjpeg-dev \
-        libpam0g-dev \
-        libssl-dev \
-        libtool \
-        libx11-dev \
-        libxfixes-dev \
-        libxml-parser-perl \
-        libxrandr-dev \ \
-        meld \
-        mono-complete \
-        nasm \
-        pkg-config \
-        protobuf-compiler \
-        python-libxml2 \
-        python-pip \
-        thrift-compiler \
-        visualvm \
-        xfonts-scalable \
-        xinput \
-        xorg \
-        xserver-xorg-dev \
-        xsltproc
-
-    # install_packages_from_repo ppa:webupd8team/sublime-text-3 sublime-text
-    # install_deb_from_http https://go.microsoft.com/fwlink/?LinkID=760868 vscode.deb
-    install_packages_from_urls https://release.gitkraken.com/linux/gitkraken-amd64.deb
-    install_packages_from_repository ppa:gophers/archive golang-1.10-go
-    install_script_from_url https://sh.rustup.rs -y
-}
-
 disable_unneeded_services() {
     disable_services \
         apport \
@@ -134,11 +64,9 @@ disable_unneeded_services() {
         unattended-upgrades
 }
 
-# apply_dns_fix
 apply_bluetooth_fix
 create_user
 install_desktop
 install_remote_desktop
 install_other_software
-install_dev_software
 disable_unneeded_services

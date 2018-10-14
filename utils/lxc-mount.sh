@@ -1,7 +1,7 @@
 #!/bin/bash
 
 set -e
-SCRIPT_HOME=$(readlink -f "$(dirname "${BASH_SOURCE[0]}")")
+SCRIPT_HOME="$(dirname "$(readlink -f "${BASH_SOURCE[0]}")")"
 source $SCRIPT_HOME/../common/lxc-helpers.sh "$SCRIPT_HOME"
 set -u
 
@@ -12,8 +12,8 @@ if [ $# -ne 2 ]; then
     exit 1
 fi
 
-CONTAINER_NAME=$1
-MOUNT=$2
+CONTAINER_NAME="$1"
+MOUNT="$2"
 
-lxc_set_container $CONTAINER_NAME
+lxc_select_container_name $CONTAINER_NAME
 lxc_mount "$MOUNT"

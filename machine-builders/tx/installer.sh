@@ -4,12 +4,22 @@ DESKTOP_TYPE=mate
 USERNAME="$1"
 PASSWORD="$2"
 
+apply_bluetooth_fix()
+{
+    # Force bluetooth to install and then disable it so that it doesn't break the rest of the install.
+    set +e
+    apt install -y bluez
+    set -e
+    systemctl disable bluetooth
+    apt install -y
+}
+
 create_user()
 {
-	if [ $USERNAME != ubuntu ]; then
-		userdel -r ubuntu
-	    useradd --create-home --shell /bin/bash --user-group --groups adm,sudo $USERNAME
-	fi
+    if [ $USERNAME != ubuntu ]; then
+        userdel -r ubuntu
+        useradd --create-home --shell /bin/bash --user-group --groups adm,sudo $USERNAME
+    fi
     echo "$USERNAME:$PASSWORD" | chpasswd
 }
 
@@ -27,9 +37,14 @@ install_remote_desktop() {
 
 install_other_software() {
     install_packages \
-        filezilla \
         remmina \
-        telnet
+        amule \
+        transmission \
+        filezilla \
+        nfs-common \
+        telnet \
+        mirage \
+        vlc
 }
 
 disable_unneeded_services() {

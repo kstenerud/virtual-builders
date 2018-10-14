@@ -1,6 +1,6 @@
 #!/bin/sh
 
-GIT_REPO=$1
+GIT_REPO="$1"
 
 # Fix broken apline download links
 echo "http://dl-4.alpinelinux.org/alpine/v3.7/main" >> /etc/apk/repositories

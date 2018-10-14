@@ -9,7 +9,7 @@ ALLOWED_RESOLUTIONS=( 640x480 800x480 800x600 832x624 960x640 1024x600 1024x768 
 
 function set_resolution {
 	clover_image="$1"
-    resolution=$2
+    resolution="$2"
     mount_point="/tmp/clover_mount"
     config_plist="$mount_point/EFI/CLOVER/config.plist"
 
@@ -22,7 +22,7 @@ function set_resolution {
 }
 
 function is_valid_resolution {
-    resolution=$1
+    resolution="$1"
     for i in "${ALLOWED_RESOLUTIONS[@]}"; do
         if [ "$i" == "$resolution" ]; then
             echo "true"
@@ -48,8 +48,8 @@ fi
 
 set -eu
 
-CLOVER_IMAGE=$1
-SCREEN_RESOLUTION=$2
+CLOVER_IMAGE="$1"
+SCREEN_RESOLUTION="$2"
 
 if [ $(is_valid_resolution "$SCREEN_RESOLUTION") != "true" ]; then
     echo "$SCREEN_RESOLUTION is not a valid resolution."

@@ -8,7 +8,7 @@
 
 set -eu
 
-SCRIPT_HOME=$(readlink -f "$(dirname "${BASH_SOURCE[0]}")")
+SCRIPT_HOME="$(dirname "$(readlink -f "${BASH_SOURCE[0]}")")"
 
 CONTAINER_NAME=vlmcsd-builder
 GIT_REPO=https://github.com/kstenerud/vlmcsd.git

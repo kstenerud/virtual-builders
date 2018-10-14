@@ -4,10 +4,10 @@ set -eu
 
 create_user()
 {
-	username=$1
-	uid=$2
+	username="$1"
+	uid="$2"
 	set +u
-	gid=$3
+	gid="$3"
 	set -u
 	if [ "X$gid" = "X" ]; then
 		gid=$uid

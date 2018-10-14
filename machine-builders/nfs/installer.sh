@@ -1,4 +1,4 @@
-MOUNT_PATHS=$@
+MOUNT_PATHS="$@"
 
 get_readwrite() {
     case "$1" in
@@ -11,9 +11,9 @@ get_readwrite() {
 }
 
 mount_share() {
-    path=$1
-    machine=$2
-    readwrite=$(get_readwrite $3)
+    path="$1"
+    machine="$2"
+    readwrite="$(get_readwrite $3)"
     exports="/etc/exports"
     echo "$path $machine($readwrite,all_squash,no_subtree_check)" >> $exports
 }
@@ -23,9 +23,9 @@ install_packages nfs-utils
 
 for i in $MOUNT_PATHS; do
     set -- $(get_colon_separated_arguments 3 $i)
-    path=$1
-    machine=$2
-    readwrite=$3
+    path="$1"
+    machine="$2"
+    readwrite="$3"
 
     mount_share $path $machine $readwrite
 done

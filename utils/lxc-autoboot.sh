@@ -9,7 +9,7 @@ fi
 
 set -eu
 
-CONTAINER_NAME=$1
+CONTAINER_NAME="$1"
 
 lxc config set $CONTAINER_NAME boot.autostart 1
 

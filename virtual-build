@@ -2,7 +2,7 @@
 
 set -eu
 
-SCRIPT_HOME=$(readlink -f "$(dirname "${BASH_SOURCE[0]}")")
+SCRIPT_HOME="$(dirname "$(readlink -f "${BASH_SOURCE[0]}")")"
 
 list_machines()
 {
@@ -27,7 +27,7 @@ if [ $# -eq 0 ]; then
 	exit 1
 fi
 
-MACHINE_TYPE=$1
+MACHINE_TYPE="$1"
 
 if [ ! -d "$SCRIPT_HOME/machine-builders/$MACHINE_TYPE" ]; then
 	echo "$MACHINE_TYPE: unknown machine type."

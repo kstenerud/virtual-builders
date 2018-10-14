@@ -1,6 +1,6 @@
 set -eu
 
-RELEASE=$1
+RELEASE="$1"
 
 install_packages apt-mirror python3
 

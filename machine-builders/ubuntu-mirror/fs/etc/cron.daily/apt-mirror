@@ -1,3 +1,4 @@
 #!/bin/sh
 
-apt-mirror
+# Disabled for now because this corrupts the apt db
+# apt-mirror

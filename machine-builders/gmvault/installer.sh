@@ -1,6 +1,6 @@
 set -eu
 
-EMAIL_ADDRESS=$1
+EMAIL_ADDRESS="$1"
 
 adduser -h /home/gmail -s /sbin/nologin -D -u 1000 gmail gmail
 chmod 755 /

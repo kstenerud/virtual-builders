@@ -6,7 +6,7 @@ source $SCRIPT_HOME/../../common/lxc-helpers.sh "$SCRIPT_HOME"
 source $SCRIPT_HOME/../../common/options.sh
 set -u
 
-lxc_preconfigure ubuntu 1000 1000 "Create a Chrome Remote Desktop container." L p R u U
+lxc_preconfigure ubuntu 1000 1000 "Create a transfer desktop container." L p P R u U
 options_add_switch m path "Path to mount as the user's home dir" required
 lxc_run_standard_preinstall $@
 lxc_apply_command_line_arguments

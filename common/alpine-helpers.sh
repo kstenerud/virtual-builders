@@ -8,8 +8,8 @@ fix_repositories()
 
 create_user()
 {
-    username=$1
-    password=$2
+    username="$1"
+    password="$2"
     echo "Creating user $username"
     useradd --create-home --shell /bin/sh --user-group --groups adm,sudo $username
     echo ${username}:${password} | chpasswd
@@ -19,14 +19,14 @@ create_user()
 
 delete_user()
 {
-    username=$1
+    username="$1"
     echo "Deleting user $username"
     userdel -r $username
 }
 
 add_repositories()
 {
-    repositories=$@
+    repositories="$@"
     echo "Adding repositories $repositories"
     for url in $repositories; do
         echo "$url" >> /etc/apk/repositories
@@ -40,23 +40,23 @@ synchronize_packages()
 
 install_packages()
 {
-    packages=$@
+    packages="$@"
     echo "Installing packages $packages"
     apk add $packages
 }
 
 install_packages_from_repository()
 {
-    repo=$1
+    repo="$1"
     shift
-    packages=$@
+    packages="$@"
     add_repositories $repo
     install_packages $packages
 }
 
 install_packages_from_urls()
 {
-    urls=$@
+    urls="$@"
     echo "Installing packages from $urls"
     for url in $urls; do
         tmpfile="/tmp/tmp_deb_pkg_$(basename $url)"
@@ -68,9 +68,9 @@ install_packages_from_urls()
 
 install_script_from_url()
 {
-    url=$1
+    url="$1"
     shift
-    arguments=$@
+    arguments="$@"
     echo "Installing from script at $url with args $arguments"
     tmpfile="/tmp/tmp_install_script_$(basename $url)"
     wget -qO $tmpfile "$url"
@@ -81,7 +81,7 @@ install_script_from_url()
 
 activate_services()
 {
-    service_names=$@
+    service_names="$@"
     for service in $service_names; do
         echo "Activating service $service"
         rc-update add $service
