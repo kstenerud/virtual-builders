@@ -1,32 +1,12 @@
 set -eu
 
-DESKTOP_TYPE=mate
 USERNAME="$1"
 PASSWORD="$2"
-IS_PRIVILEGED="$3"
-
-create_user()
-{
-	if [ $USERNAME != ubuntu ]; then
-		userdel -r ubuntu
-	    useradd --create-home --shell /bin/bash --user-group --groups adm,sudo $USERNAME
-	fi
-    echo "$USERNAME:$PASSWORD" | chpasswd
-    if [ "$IS_PRIVILEGED" == "true" ]; then
-        chown $USERNAME:$USERNAME /home/$USERNAME
-    fi
-}
+CRD_RESOLUTION="$3"
 
 install_desktop() {
     install_packages software-properties-common ubuntu-mate-desktop
     apt remove -y light-locker
-}
-
-install_remote_desktop() {
-    install_packages_from_repository ppa:x2go/stable x2goserver x2goserver-xsession x2goclient
-    install_packages_from_urls https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb \
-                               https://dl.google.com/linux/direct/chrome-remote-desktop_current_amd64.deb
-    crd_enable_high_resolution
 }
 
 install_other_software() {
@@ -108,8 +88,9 @@ disable_unneeded_services() {
 }
 
 apply_bluetooth_fix
-create_user
+remove_packages cloud-init
+create_user $USERNAME $PASSWORD
 install_desktop
-install_remote_desktop
+install_remote_desktop $CRD_RESOLUTION
 install_other_software
 disable_unneeded_services

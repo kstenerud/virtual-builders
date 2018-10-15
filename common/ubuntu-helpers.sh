@@ -152,7 +152,30 @@ apply_bluetooth_fix()
     apt install -y
 }
 
-crd_enable_high_resolution()
+crd_set_resolution()
 {
-    sed -i 's/DEFAULT_SIZE_NO_RANDR = "1600x1200"/DEFAULT_SIZE_NO_RANDR = "4096x2160"/g' /opt/google/chrome-remote-desktop/chrome-remote-desktop
+    resolution=$1
+    echo "Setting Chrome Remote Desktop resolution to $resolution"
+    sed_command="s/DEFAULT_SIZE_NO_RANDR = \"1600x1200\"/DEFAULT_SIZE_NO_RANDR = \"$resolution\"/g"
+    sed -i "$sed_command" /opt/google/chrome-remote-desktop/chrome-remote-desktop
+}
+
+install_remote_desktop() {
+    resolution=$1
+    install_packages_from_repository ppa:x2go/stable x2goserver x2goserver-xsession x2goclient
+    install_packages_from_urls https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb \
+                               https://dl.google.com/linux/direct/chrome-remote-desktop_current_amd64.deb
+    crd_set_resolution $resolution
+}
+
+create_user()
+{
+    username=$1
+    password=$2
+    if [ $username != ubuntu ]; then
+        userdel -r ubuntu
+        useradd --create-home --shell /bin/bash --user-group --groups adm,sudo $username
+    fi
+    echo "$username:$password" | chpasswd
+    chown $USERNAME:$USERNAME /home/$USERNAME
 }

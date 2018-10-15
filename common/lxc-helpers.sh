@@ -86,6 +86,7 @@ lxc_add_standard_flag()
 }
 
 lxc_add_standard_switch b bridge   "The bridge to connect to"       required  br0
+lxc_add_standard_switch C resolution "Chrome Remote Desktop resolution (XxY)"  required 1920x1080
 lxc_add_standard_flag   K          "Add KVM support"                optional
 lxc_add_standard_switch L locale   "Language:region:kb_layout:kb_model:timezone (ex: en:US:us:pc105:America/Vancouver)" optional
 lxc_add_standard_flag   N          "Make container nestable"        optional
