@@ -11,7 +11,7 @@ options_add_switch m path "Mount for config & data files" required
 lxc_run_standard_preinstall $@
 lxc_apply_command_line_arguments
 
-MOUNT="$(options_get_value m)"
+MOUNT="$(options_get_existing_directory m)"
 
 lxc_mount_host data "$MOUNT" "/var/lib/transmission" w
 lxc_run_installer_script

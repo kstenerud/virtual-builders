@@ -28,7 +28,7 @@ EMULATOR_PATH="$(options_get_value e)"
 VNC_PORT="$(options_get_value v)"
 NETWORK_BRIDGE="$(options_get_value b)"
 INSTALL_DISK="$(options_get_value I)"
-VM_HOME="$(readlink -f "$(options_get_value m)")"
+VM_HOME="$(readlink -f "$(options_get_existing_directory m)")"
 PRIMARY_HDD="$VM_HOME/primary.qcow2"
 MAC_ADDRESS="$(options_get_value M)"
 

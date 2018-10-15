@@ -11,7 +11,7 @@ options_add_switch m path "Mount location for blogs" required
 lxc_run_standard_preinstall $@
 lxc_apply_command_line_arguments
 
-MOUNT="$(options_get_value m)"
+MOUNT="$(options_get_existing_directory m)"
 
 lxc_mount_host blogs "$MOUNT" "/home/tumblr/blogs" w
 lxc_run_installer_script

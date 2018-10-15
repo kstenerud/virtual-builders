@@ -30,6 +30,7 @@ for i in $MEDIA_MOUNTS; do
 		options_print_help_and_exit 1
 	fi
 	host_path="${params[0]}"
+	ensure_directory_exists "$host_path"
 	name="${params[1]}"
 	guest_path="/mnt/media/$name"
 

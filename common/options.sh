@@ -128,6 +128,17 @@ options_get_value()
     options_i_get_value $(options_i_get_switch_code $switch_char)
 }
 
+options_get_existing_directory()
+{
+    directory="$(options_get_value $@)"
+    if [ ! -d "$directory" ]; then
+        >&2 echo "$directory: Expected directory not found"
+        return 1
+    fi
+    switch_char="$1"
+    options_i_get_value $(options_i_get_switch_code $switch_char)
+}
+
 # Get all values for a switch.
 #
 # @param switch_char The switch whose values to get.

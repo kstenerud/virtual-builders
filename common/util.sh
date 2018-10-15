@@ -25,7 +25,8 @@ generate_mac_address()
 	fix_mac_address $(generate_partial_mac_address 6)
 }
 
-try_copy() {
+try_copy()
+{
     src_file="$1"
     dst_file="$2"
     if [ ! -f "$dst_file" ]; then
@@ -34,7 +35,8 @@ try_copy() {
     fi
 }
 
-fill_placeholder() {
+fill_placeholder()
+{
     placeholder="PLACEHOLDER_$1"
     replacement="$(echo "$2" | sed 's/\//\\\//g')"
     sed "s/$placeholder/$replacement/g"
@@ -69,4 +71,13 @@ is_numeric()
 	    ''|*[!0-9]*) return 1 ;;
 	    *) return 0 ;;
 	esac
+}
+
+ensure_directory_exists()
+{
+    directory="$1"
+    if [ ! -d "$directory" ]; then
+        >&2 echo "$directory: Expected directory not found"
+        return 1
+    fi
 }

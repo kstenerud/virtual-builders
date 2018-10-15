@@ -15,7 +15,7 @@ lxc_apply_command_line_arguments
 
 USERNAME="$(options_get_value u)"
 PASSWORD="$(options_get_value p)"
-MOUNT="$(options_get_value m)"
+MOUNT="$(options_get_existing_directory m)"
 IS_PRIVILEGED=true
 
 lxc_mount_host home "$MOUNT" "/home/$USERNAME" w

@@ -12,7 +12,7 @@ options_add_switch r release "Release to mirror"           required bionic
 lxc_run_standard_preinstall $@
 lxc_apply_command_line_arguments
 
-MOUNT="$(options_get_value m)"
+MOUNT="$(options_get_existing_directory m)"
 RELEASE="$(options_get_value r)"
 
 lxc_mount_host mirror "$MOUNT" "/var/spool/apt-mirror" w

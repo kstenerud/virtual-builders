@@ -220,7 +220,11 @@ lxc_apply_command_line_arguments()
     sleep 1
     lxc_restart
     lxc_wait_for_network
-    if [ ! -z "$(options_get_value R)"  ]; then lxc_use_custom_mirror "$(options_get_value R)";     fi
+    if [ ! -z "$(options_get_value R)"  ]; then
+        lxc_use_custom_mirror "$(options_get_value R)";
+    else
+        lxc_update_packages
+    fi
     if [ ! -z "$(options_get_value L)" ];  then lxc_set_locale_kb_tz "$(options_get_value L)";      fi
 }
 
@@ -266,9 +270,11 @@ lxc_run_script()
     dst_script="$src_script"
 
     echo "#!${LXC_CONTAINER_INTERPRETER}" > $src_script
+    echo "set -eu" >> $src_script
     tail -n +2 "${LXC_HELPERS_HOME}/${LXC_CONTAINER_HELPERS_SCRIPT}" >> $src_script
     tail -n +2 "${LXC_HELPERS_HOME}/util.sh" >> $src_script
-    echo "set -eu" >> $src_script
+    echo "" >> $src_script
+    echo "" >> $src_script
     cat "$user_script" >> $src_script
     echo "" >> $src_script
     chmod a+x $src_script
@@ -315,12 +321,27 @@ deb [ arch=amd64 ] $mirror_url $release-security main restricted
 deb [ arch=amd64 ] $mirror_url $release-security universe
 deb [ arch=amd64 ] $mirror_url $release-security multiverse
 "
+    lxc_update_packages
+}
+
+lxc_update_packages_ubuntu()
+{
     lxc_exec apt update
+}
+
+lxc_update_packages_alpine()
+{
+    lxc_exec apk update
 }
 
 lxc_use_custom_mirror()
 {
     lxc_use_custom_mirror_$LXC_CONTAINER_DISTRIBUTION $@
+}
+
+lxc_update_packages()
+{
+    lxc_update_packages_$LXC_CONTAINER_DISTRIBUTION $@
 }
 
 

@@ -33,7 +33,7 @@ NETWORK_BRIDGE="$(options_get_value b)"
 INSTALL_DISK="$(options_get_value I)"
 DRIVERS_DISK="$(options_get_value D)"
 MAC_ADDRESS="$(options_get_value M)"
-VM_HOME="$(readlink -f "$(options_get_value m)")"
+VM_HOME="$(readlink -f "$(options_get_existing_directory m)")"
 PRIMARY_HDD="$VM_HOME/primary.qcow2"
 
 
