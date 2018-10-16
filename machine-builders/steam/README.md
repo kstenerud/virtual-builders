@@ -36,3 +36,11 @@ DirectX 10
 ----------
 
 Some games (such as kf2) try to load using DX11, but wine support is spotty. Force it into DX10 by adding `-dx10` to a game's launch options.
+
+
+KF2 Config File
+---------------
+
+	drive_c/users/karl/My Documents/My Games/KillingFloor2/KFGame/Config
+
+Copy from `/tmp/KFSystemSettings.ini`
