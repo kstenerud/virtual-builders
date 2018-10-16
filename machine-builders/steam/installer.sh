@@ -43,7 +43,7 @@ download_steam()
 
 add_bin_path()
 {
-    echo "PATH=\"$HOME/bin:$PATH\"" >> /home/$USERNAME/.profile
+    echo "PATH=\"\$HOME/bin:\$PATH\"" >> /home/$USERNAME/.profile
 }
 
 install_steam_scripts()
