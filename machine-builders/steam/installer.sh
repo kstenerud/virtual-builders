@@ -12,6 +12,7 @@ install_desktop() {
 install_other_software() {
     dpkg --add-architecture i386 && apt update
     install_packages \
+        nmap \
         filezilla \
         remmina \
         telnet \

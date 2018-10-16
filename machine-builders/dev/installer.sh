@@ -35,6 +35,7 @@ install_other_software() {
         mono-complete \
         mtools \
         nasm \
+        nmap \
         net-tools \
         nfs-common \
         ovmf \

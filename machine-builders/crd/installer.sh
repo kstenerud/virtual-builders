@@ -11,6 +11,7 @@ install_desktop() {
 
 install_other_software() {
     install_packages \
+        nmap \
         filezilla \
         remmina \
         telnet

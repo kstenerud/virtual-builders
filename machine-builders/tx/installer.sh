@@ -12,6 +12,7 @@ install_desktop() {
 
 install_other_software() {
     install_packages \
+        nmap \
         remmina \
         amule \
         transmission \

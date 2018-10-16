@@ -31,6 +31,7 @@ install_console_software()
         libvirt-bin \
         lxd \
         mtools \
+        nmap \
         net-tools \
         nfs-common \
         ovmf \
