@@ -720,6 +720,11 @@ lxc_allow_kvm()
     lxc config device set $LXC_CONTAINER_NAME vhost-net mode 0600
 }
 
+lxc_allow_snap()
+{
+    lxc_mount_host lib-modules "/lib/modules" "/lib/modules" r
+}
+
 lxc_fix_unprivileged_dbus()
 {
     # Fix to make dbus work correctly on non-privileged containers

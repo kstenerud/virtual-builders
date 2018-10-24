@@ -11,6 +11,7 @@ options_add_switch m path "Path to mount as the user's home dir" required
 lxc_run_standard_preinstall $@
 lxc_allow_nesting
 lxc_allow_kvm
+lxc_allow_snap
 lxc_apply_command_line_arguments
 
 USERNAME="$(options_get_value u)"

@@ -10,6 +10,7 @@ lxc_preconfigure ubuntu 1000 1000 "Create a Linux desktop container." C L p P R 
 options_add_switch d desktop  "Desktop type to use"                  required mate
 options_add_switch m path     "Path to mount as the user's home dir" required
 lxc_run_standard_preinstall $@
+lxc_allow_snap
 lxc_apply_command_line_arguments
 
 USERNAME="$(options_get_value u)"
