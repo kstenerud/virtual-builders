@@ -55,7 +55,8 @@ install_console_software()
         snapd \
         squashfuse \
         ubuntu-dev-tools \
-        uvtool
+        uvtool \
+        virtinst
 
     install_classic_snaps \
         git-ubuntu \
@@ -70,7 +71,6 @@ install_gui_software() {
         hexchat \
         meld \
         virt-manager \
-        virtinst \
         wireshark
 
     install_snaps \
