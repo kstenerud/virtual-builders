@@ -285,6 +285,13 @@ lxc_run_script()
     lxc exec $LXC_CONTAINER_NAME -- rm $dst_script
 }
 
+lxc_get_default_ip_address()
+{
+    # Using sed + grep instead of awk since alpine may not have it.
+    default_iface=$(lxc_exec grep "^\w*\s*00000000" /proc/net/route | sed 's/\([a-z0-9]*\).*/\1/')
+    lxc_exec ip addr show dev "$default_iface" | grep "inet " | sed 's/[^0-9]*\([0-9.]*\).*/\1/'
+}
+
 
 # ------------
 # Repositories
@@ -777,5 +784,5 @@ lxc_run_installer_script()
 {
     echo "Running installer script"
     lxc_run_script "$LXC_SOURCE_HOME/installer.sh" $@
-    echo "Installer script completed successfully."
+    echo "Installer script completed successfully. Container is running at $(lxc_get_default_ip_address)"
 }

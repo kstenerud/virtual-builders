@@ -28,6 +28,19 @@ delete_user()
     userdel -r $username
 }
 
+get_homedir()
+{
+    username=$1
+    eval echo "~$username"
+}
+
+chown_homedir()
+{
+    username=$1
+
+    chown -R $username:$(id -g $username) "$(get_homedir $username)"
+}
+
 add_repositories()
 {
     repositories="$@"
@@ -168,14 +181,23 @@ install_remote_desktop() {
     crd_set_resolution $resolution
 }
 
+set_user_password()
+{
+    username=$1
+    password="$2"
+
+    echo "$username:$password" | chpasswd
+}
+
 create_user()
 {
     username=$1
-    password=$2
+    password="$2"
     if [ $username != ubuntu ]; then
         userdel -r ubuntu
         useradd --create-home --shell /bin/bash --user-group --groups adm,sudo $username
     fi
-    echo "$username:$password" | chpasswd
-    chown $USERNAME:$USERNAME /home/$USERNAME
+
+    set_user_password $username "$password"
+    chown_homedir $username
 }
