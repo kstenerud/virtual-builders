@@ -1,5 +1,5 @@
 set -eu
 
-install_packages apt-cache-ng
+install_packages apt-cacher-ng
 
 service apt-cacher-ng restart
