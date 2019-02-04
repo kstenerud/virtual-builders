@@ -6,7 +6,7 @@ source $SCRIPT_HOME/../../common/lxc-helpers.sh "$SCRIPT_HOME"
 source $SCRIPT_HOME/../../common/options.sh
 set -u
 
-lxc_preconfigure ubuntu 0 0 "Create an Ubuntu mirror container." L U
+lxc_preconfigure ubuntu 105 109 "Create an Ubuntu mirror container." L U
 options_add_switch m path    "Path to mount as the mirror" required
 lxc_run_standard_preinstall $@
 lxc_apply_command_line_arguments
