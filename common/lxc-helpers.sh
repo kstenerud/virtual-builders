@@ -684,6 +684,7 @@ lxc_is_network_up()
 
 lxc_wait_for_network()
 {
+    sleep 1
     until lxc_is_network_up;
     do
         echo "Waiting for network"
