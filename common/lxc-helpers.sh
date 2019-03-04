@@ -64,10 +64,10 @@ lxc_i_add_distrbution  ubuntu  /bin/bash  ubuntu-helpers.sh
 
 lxc_i_add_type  alpine  alpine 3.7    images:alpine/3.7
 lxc_i_add_type  edge    alpine edge   images:alpine/edge
-lxc_i_add_type  ubuntu  ubuntu bionic images:ubuntu/bionic
-lxc_i_add_type  bionic  ubuntu bionic images:ubuntu/bionic
+lxc_i_add_type  ubuntu  ubuntu bionic ubuntu-daily:bionic
+lxc_i_add_type  bionic  ubuntu bionic ubuntu-daily:bionic
 lxc_i_add_type  cosmic  ubuntu cosmic ubuntu-daily:cosmic
-lxc_i_add_type  xenial  ubuntu xenial images:ubuntu/xenial
+lxc_i_add_type  xenial  ubuntu xenial ubuntu-daily:xenial
 
 lxc_add_standard_switch()
 {
