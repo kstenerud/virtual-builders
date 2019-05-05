@@ -690,6 +690,7 @@ lxc_wait_for_network()
         echo "Waiting for network"
         sleep 1
     done
+    sleep 2
 }
 
 lxc_can_guest_reach_address()
