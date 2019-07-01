@@ -92,7 +92,7 @@
     </controller>
     <interface type='bridge'>
       <mac address='PLACEHOLDER_MAC_ADDRESS'/>
-      <source bridge='br0'/>
+      <source bridge='PLACEHOLDER_NETWORK_BRIDGE'/>
       <target dev='vnet0'/>
       <model type='rtl8139'/>
       <alias name='net0'/>

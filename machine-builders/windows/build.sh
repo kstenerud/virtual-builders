@@ -6,7 +6,7 @@ source $SCRIPT_HOME/../../common/options.sh
 source $SCRIPT_HOME/../../common/util.sh
 set -u
 
-options_set_usage "build.sh $(basename "$SCRIPT_HOME") [options] <vm-home>"
+options_set_usage "build.sh $(basename "$SCRIPT_HOME") [options]"
 options_set_help_flag_and_description H "Create a Windows 10 VM."
 options_add_switch n name      "Machine name"         required $(basename $(readlink -f "$SCRIPT_HOME"))
 options_add_switch r gigabytes "RAM size"             required 16
@@ -19,10 +19,6 @@ options_add_switch D path      "Path to drivers disk" optional
 options_add_switch M address   "Ethernet MAC Address" required random
 options_add_switch m path      "Path to vm files"     required
 options_read_arguments $@
-
-if [ $(options_count_free_arguments) -lt 1 ]; then
-    options_print_help_and_exit 1
-fi
 
 MACHINE_NAME="$(options_get_value n)"
 RAM_GB="$(options_get_value r)"
@@ -97,7 +93,7 @@ generate_drivers_disk_xml()
     if [ "X$DRIVERS_DISK" != "X" ]; then
         echo -n "<disk type='file' device='cdrom'>"
         echo -n "  <driver name='qemu' type='raw'/>"
-        echo -n "  <source file='$INSTALL_DISK'/>"
+        echo -n "  <source file='$DRIVERS_DISK'/>"
         echo -n "  <backingStore/>"
         echo -n "  <target dev='hdb' bus='ide'/>"
         echo -n "  <readonly/>"
