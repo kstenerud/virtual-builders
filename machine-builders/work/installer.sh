@@ -15,4 +15,5 @@ git clone --recurse-submodules -j8 https://github.com/kstenerud/work-installer.g
 ./work-installer/install-dev-software.sh
 ./work-installer/install-gui-software.sh
 ./work-installer/add-to-groups.sh $USERNAME
+./work-installer/install-hostmanager.sh
 rm -rf work-installer
