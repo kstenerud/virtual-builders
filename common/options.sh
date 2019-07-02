@@ -106,14 +106,12 @@ options_add_flag()
 #
 options_read_arguments()
 {
-    set +e
-    options_i_read_arguments $@
+    options_i_read_arguments $@ || true
     if [ $? -ne 0 ]; then
         echo
         options_print_usage
         exit 1
     fi
-    set -e
 }
 
 # Get the value for a switch. It will either be the value set by the user or the default value.

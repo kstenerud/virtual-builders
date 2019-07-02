@@ -10,6 +10,9 @@ create_user $USERNAME "$PASSWORD"
 remove_packages cloud-init
 install_packages git
 cd /tmp
-git clone https://github.com/kstenerud/ubuntu-dev-installer.git
-./ubuntu-dev-installer/install-guest.sh -d -r $CRD_RESOLUTION -u $USERNAME
-rm -rf ubuntu-dev-installer
+git clone --recurse-submodules -j8 https://github.com/kstenerud/work-installer.git
+./work-installer/install-virtual-desktop.sh -r $CRD_RESOLUTION -u $USERNAME 
+./work-installer/install-dev-software.sh
+./work-installer/install-gui-software.sh
+./work-installer/add-to-groups.sh $USERNAME
+rm -rf work-installer

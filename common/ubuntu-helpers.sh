@@ -149,18 +149,14 @@ disable_services()
     service_names="$@"
     for service in $service_names; do
         echo "Disabling service $service"
-        set +e
-        systemctl disable $service
-        set -e
+        systemctl disable $service || true
     done
 }
 
 apply_bluetooth_fix()
 {
     # Force bluetooth to install and then disable it so that it doesn't break the rest of the install.
-    set +e
-    apt install -y bluez
-    set -e
+    apt install -y bluez || true
     systemctl disable bluetooth
     apt install -y
 }
