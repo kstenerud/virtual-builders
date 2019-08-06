@@ -90,11 +90,11 @@
       <alias name='ide'/>
       <address type='pci' domain='0x0000' bus='0x00' slot='0x01' function='0x1'/>
     </controller>
-    <interface type='bridge'>
+    <interface type='network'>
       <mac address='PLACEHOLDER_MAC_ADDRESS'/>
-      <source bridge='PLACEHOLDER_NETWORK_BRIDGE'/>
+      <source network='default' bridge='PLACEHOLDER_NETWORK_BRIDGE'/>
       <target dev='vnet0'/>
-      <model type='rtl8139'/>
+      <model type='virtio'/>
       <alias name='net0'/>
       <address type='pci' domain='0x0000' bus='0x00' slot='0x03' function='0x0'/>
     </interface>
@@ -123,8 +123,12 @@
     <graphics type='vnc' port='PLACEHOLDER_VNC_PORT' autoport='no' listen='0.0.0.0'>
       <listen type='address' address='0.0.0.0'/>
     </graphics>
+    <sound model='ich6'>
+      <alias name='sound0'/>
+      <address type='pci' domain='0x0000' bus='0x00' slot='0x07' function='0x0'/>
+    </sound>
     <video>
-      <model type='qxl' ram='131072' vram='131072' vgamem='131072' heads='1' primary='yes'/>
+      <model type='virtio' heads='1' primary='yes'/>
       <alias name='video0'/>
       <address type='pci' domain='0x0000' bus='0x00' slot='0x02' function='0x0'/>
     </video>
