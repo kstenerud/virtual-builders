@@ -32,9 +32,11 @@ install_other_software() {
         libvirt-bin \
         lxd \
         meld \
+        meson \
         mono-complete \
         mtools \
         nasm \
+        ninja-build \
         nmap \
         net-tools \
         nfs-common \
@@ -63,15 +65,13 @@ install_other_software() {
         virtinst
 
     install_classic_snaps \
-        git-ubuntu \
-        sublime-text \
-        ustriage
+        sublime-text
 
     install_packages_from_urls \
         https://go.microsoft.com/fwlink/?LinkID=760868 \
         https://release.gitkraken.com/linux/gitkraken-amd64.deb
 
-    install_packages_from_repository ppa:gophers/archive golang-1.10-go
+    install_packages_from_repository ppa:gophers/archive golang-go
 
     install_script_from_url https://sh.rustup.rs -y
 }
