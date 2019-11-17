@@ -22,18 +22,15 @@ install_other_software() {
         debconf-utils \
         devscripts \
         docker.io \
-        dpkg-dev \
         flex \
-        gradle \
+        gdb \
         git \
-        git-buildpackage \
         gvfs-bin \
         libtool \
         libvirt-bin \
         lxd \
         meld \
         meson \
-        mono-complete \
         mtools \
         nasm \
         ninja-build \
@@ -42,21 +39,13 @@ install_other_software() {
         nfs-common \
         ovmf \
         pkg-config \
-        python-pip \
-        python3-argcomplete \
-        python3-lazr.restfulclient \
-        python3-debian \
-        python3-distro-info \
-        python3-launchpadlib \
-        python3-pygit2 \
-        python3-ubuntutools \
-        python3-pkg-resources \
+        python3-pip \
         python3-pytest \
-        python3-petname \
         qemu \
         qemu-kvm \
-        quilt \
         remmina \
+        remmina-plugin-nx \
+        remmina-plugin-spice \
         rsnapshot \
         telnet \
         ubuntu-dev-tools \
