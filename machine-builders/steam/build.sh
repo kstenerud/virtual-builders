@@ -6,9 +6,10 @@ source $SCRIPT_HOME/../../common/lxc-helpers.sh "$SCRIPT_HOME"
 source $SCRIPT_HOME/../../common/options.sh
 set -u
 
-lxc_preconfigure ubuntu 1000 1000 "Create a Steam Desktop container." C L p R u U
+lxc_preconfigure ubuntu 1000 1000 "Create a Steam container." C L p R u U
 options_add_switch m path "Path to mount as the user's home dir" required
 lxc_run_standard_preinstall $@
+lxc_allow_snap
 lxc_apply_command_line_arguments
 
 USERNAME="$(options_get_value u)"
