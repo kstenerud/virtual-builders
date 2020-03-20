@@ -492,7 +492,7 @@ lxc_copy_dir_into_container()
     srcdir="$1"
     dstdir="$2"
     pushd "$srcdir"
-    tar cf - . | lxc exec $LXC_CONTAINER_NAME -- tar xf - -C "$dstdir"
+    tar cf - . | lxc exec $LXC_CONTAINER_NAME -- tar xf - --no-same-owner -C "$dstdir"
     popd
 
 }
