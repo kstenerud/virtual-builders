@@ -1,0 +1,19 @@
+[Unit]
+Description=PureVPN Connect
+Wants=network-online.target
+After=network.target
+
+[Service]
+ExecStart=/usr/bin/purevpn -c NL
+ExecStop=/usr/bin/purevpn -d
+User=root
+StandardOutput=syslog
+StandardError=syslog
+SyslogIdentifier=purevpn-nl
+
+# Useful during debugging; remove it once the service is working
+StandardOutput=console
+
+[Install]
+WantedBy=multi-user.target
+

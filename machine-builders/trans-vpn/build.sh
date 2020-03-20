@@ -6,7 +6,7 @@ source $SCRIPT_HOME/../../common/lxc-helpers.sh "$SCRIPT_HOME"
 source $SCRIPT_HOME/../../common/options.sh
 set -u
 
-lxc_preconfigure ubuntu 1000 1000 "Transmission + PureVPN." L U
+lxc_preconfigure ubuntu 111 115 "Transmission + PureVPN." L U
 options_add_switch m path    "Path to mount for downloads" required
 lxc_run_standard_preinstall $@
 lxc_apply_command_line_arguments
