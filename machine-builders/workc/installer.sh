@@ -5,6 +5,9 @@ PASSWORD="$2"
 
 install_console_software()
 {
+    install_snaps \
+        docker
+
     install_packages \
         autoconf \
         autopkgtest \
@@ -16,7 +19,7 @@ install_console_software()
         curl \
         debconf-utils \
         devscripts \
-        docker.io \
+        docker-compose \
         dpkg-dev \
         flex \
         fuse \
@@ -44,16 +47,9 @@ install_console_software()
         qemu-kvm \
         quilt \
         rsnapshot \
-        snapcraft \
-        snapd \
         squashfuse \
         ubuntu-dev-tools \
-        uvtool \
         virtinst
-
-    install_classic_snaps \
-        git-ubuntu \
-        ustriage
 }
 
 disable_unneeded_services() {

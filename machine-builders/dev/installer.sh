@@ -10,6 +10,10 @@ install_desktop() {
 }
 
 install_other_software() {
+    install_snaps \
+        sublime-text:classic \
+        docker
+
     install_packages \
         autoconf \
         autopkgtest \
@@ -21,7 +25,7 @@ install_other_software() {
         curl \
         debconf-utils \
         devscripts \
-        docker.io \
+        docker-compose \
         flex \
         gdb \
         git \
@@ -51,9 +55,6 @@ install_other_software() {
         uvtool \
         virt-manager \
         virtinst
-
-    install_classic_snaps \
-        sublime-text
 
     install_packages_from_urls \
         https://go.microsoft.com/fwlink/?LinkID=760868 \
