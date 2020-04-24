@@ -27,8 +27,7 @@ install_other_software() {
         git \
         gvfs-bin \
         libtool \
-        libvirt-bin \
-        lxd \
+        libvirt-clients \
         meld \
         meson \
         mtools \

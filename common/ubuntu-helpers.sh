@@ -171,7 +171,8 @@ crd_set_resolution()
 
 install_remote_desktop() {
     resolution=$1
-    install_packages_from_repository ppa:x2go/stable x2goserver x2goserver-xsession x2goclient
+    # TODO: Not available for 20.04 yet
+    # install_packages_from_repository ppa:x2go/stable x2goserver x2goserver-xsession x2goclient
     install_packages_from_urls https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb \
                                https://dl.google.com/linux/direct/chrome-remote-desktop_current_amd64.deb
     crd_set_resolution $resolution

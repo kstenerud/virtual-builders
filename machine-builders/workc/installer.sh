@@ -23,7 +23,6 @@ install_console_software()
         git \
         git-buildpackage \
         libvirt-bin \
-        lxd \
         mtools \
         nmap \
         net-tools \

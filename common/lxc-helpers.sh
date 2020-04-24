@@ -64,7 +64,8 @@ lxc_i_add_distrbution  ubuntu  /bin/bash  ubuntu-helpers.sh
 
 lxc_i_add_type  alpine  alpine 3.7    images:alpine/3.7
 lxc_i_add_type  edge    alpine edge   images:alpine/edge
-lxc_i_add_type  ubuntu  ubuntu bionic ubuntu-daily:bionic
+lxc_i_add_type  ubuntu  ubuntu focal  ubuntu-daily:focal
+lxc_i_add_type  focal   ubuntu focal  ubuntu-daily:focal
 lxc_i_add_type  bionic  ubuntu bionic ubuntu-daily:bionic
 lxc_i_add_type  cosmic  ubuntu cosmic ubuntu-daily:cosmic
 lxc_i_add_type  xenial  ubuntu xenial ubuntu-daily:xenial
@@ -731,7 +732,9 @@ lxc_allow_kvm()
 
 lxc_allow_snap()
 {
-    lxc_mount_host lib-modules "/lib/modules" "/lib/modules" r
+# TODO: Not needed in 20.04?
+#    lxc_mount_host lib-modules "/lib/modules" "/lib/modules" r
+echo
 }
 
 lxc_fix_unprivileged_dbus()
