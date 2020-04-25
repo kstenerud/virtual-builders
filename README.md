@@ -10,6 +10,8 @@ I spent quite a lot of time figuring out the best way to set up various environm
 Usage
 -----
 
+For best results, run `echo 5000 | sudo tee /proc/sys/kernel/keys/maxkeys`. Otherwise you may run into problems with Docker inside of lxc: `could not create session key: disk quota exceeded.`
+
 Simply run the top level `build.sh` to see what options you have. It will list all environments it can build.
 
 Build.sh is just a launcher for the real build scripts `machine-builders/xyz/build.sh`. You can look inside them to see how they operate, or just call `build.sh xyz -H` to see how to invoke them.
