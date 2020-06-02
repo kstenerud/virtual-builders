@@ -14,14 +14,20 @@ install_other_software() {
     install_packages \
         nmap \
         remmina \
-        amule \
         transmission \
         filezilla \
         nfs-common \
         telnet \
-        mirage \
         vlc
 }
+
+mkdir /tmp/amule
+pushd /tmp/amule
+wget http://archive.ubuntu.com/ubuntu/pool/universe/a/amule/amule_2.3.2-6_amd64.deb
+wget http://archive.ubuntu.com/ubuntu/pool/universe/a/amule/amule-common_2.3.2-6_all.deb
+wget http://archive.ubuntu.com/ubuntu/pool/universe/w/wxwidgets3.0/libwxgtk3.0-0v5_3.0.4+dfsg-12_amd64.deb
+apt install -y ./*.deb
+popd
 
 disable_unneeded_services() {
     disable_services \
