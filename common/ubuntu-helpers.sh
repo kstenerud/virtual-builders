@@ -82,6 +82,7 @@ install_packages_from_repository()
     repo="$1"
     shift
     packages="$@"
+    echo "Installing from $repo: $packages"
     add_repositories $repo
     install_packages $packages
 }
@@ -115,6 +116,7 @@ install_snap()
 {
     snap="$1"
     mode="$2"
+    echo "Installing snap $snap using mode $mode"
     snap install --$mode $snap
 }
 
@@ -190,6 +192,7 @@ create_user()
 {
     username=$1
     password="$2"
+    echo "Creating user $username"
     if [ $username != ubuntu ]; then
         userdel -r ubuntu
         useradd --create-home --shell /bin/bash --user-group --groups adm,sudo $username

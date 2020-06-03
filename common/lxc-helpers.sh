@@ -179,6 +179,7 @@ lxc_preconfigure()
     shift
     description="$1"
     shift
+    echo "Preconfiguring container type $type with user:group $user:$group and args $@"
 
     options_set_usage "$(basename $LXC_SOURCE_HOME) [options]"
     options_set_help_flag_and_description H "$description"
@@ -574,6 +575,7 @@ lxc_mount_cifs() {
     share_path="$2"
     mount_point="$3"
     read_write="$4"
+    echo "Mounting CIFS $server/$share_path to $mount_point"
 
     lxc exec $LXC_CONTAINER_NAME -- mkdir -p "$mount_point"
     lxc_add_to_fstab "//$server/$share_path  \"$mount_point\"  cifs  guest,uid=1000,iocharset=utf8  0  0"
@@ -586,6 +588,7 @@ lxc_mount_nfs() {
     share_path="$2"
     mount_point="$3"
     read_write="$4"
+    echo "Mounting NFS $server/$share_path to $mount_point"
 
     lxc exec $LXC_CONTAINER_NAME -- mkdir -p "$mount_point"
     lxc_add_to_fstab "$server:\"$share_path\"  \"$mount_point\"  nfs  rsize=8192,wsize=8192,timeo=14,hard,intr,noexec,nosuid  0  0"
@@ -597,6 +600,7 @@ lxc_mount_sshfs() {
     share_path="$2"
     mount_point="$3"
     read_write="$4"
+    echo "Mounting SSH $server/$share_path to $mount_point"
 
     lxc exec $LXC_CONTAINER_NAME -- mkdir -p "$mount_point"
     lxc_add_to_fstab "$user_at_server:\"$share_path\"  \"$mount_point\"  fuse.sshfs  defaults,_netdev  0  0"
@@ -608,6 +612,7 @@ lxc_mount_host() {
     host_path="$2"
     mount_point="$3"
     read_write="$4"
+    echo "Mounting host $host_path to $mount_point"
 
     lxc exec $LXC_CONTAINER_NAME -- mkdir -p "$mount_point"
     lxc config device add $LXC_CONTAINER_NAME $device_name disk source="$host_path" path="$mount_point"

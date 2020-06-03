@@ -14,3 +14,4 @@ git clone --recurse-submodules -j8 https://github.com/kstenerud/work-installer.g
 ./work-installer/add-to-groups.sh $USERNAME
 ./work-installer/install-hostmanager.sh
 rm -rf work-installer
+sudo apt install -y openvpn network-manager-openvpn
