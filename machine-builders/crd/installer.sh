@@ -7,6 +7,12 @@ CRD_RESOLUTION="$3"
 install_desktop() {
     install_packages software-properties-common ubuntu-mate-desktop
     apt remove -y light-locker
+
+    cat <<EOF >/home/$USERNAME/.chrome-remote-desktop-session
+unset DBUS_SESSION_BUS_ADDRESS
+unset SESSION_MANAGER
+mate-session
+EOF
 }
 
 install_other_software() {
